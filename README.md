@@ -1,7 +1,6 @@
 # RHF Guesthouse website
 
-Design build for RHF Guesthouse, House 388, Apo Resettlement, Zone A, Apo, Abuja, FCT.
-Directly opposite Acropolis Park & Event Centre.
+Design build for RHF Guesthouse.
 
 ## What is here
 
