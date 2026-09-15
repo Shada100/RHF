@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:#CFCCC4;color:#1A2016;font-family:'Archivo','Helvetica Neue',Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#3D4A31;text-decoration:none}
+a:hover{color:#1A2016}
+h1,h2,p{margin:0}
+</style>
+</helmet>
+
+<div style="padding:64px 72px 80px;display:flex;flex-direction:column;gap:40px;width:2120px">
+
+<div style="display:flex;flex-wrap:wrap;gap:20px 48px;align-items:flex-end;justify-content:space-between">
+<div>
+<div style="font:500 14px/1 'Archivo',sans-serif;letter-spacing:.09em;color:#5C6152;margin-bottom:14px">RHF GUESTHOUSE, ONE SITE AT TWO WIDTHS</div>
+<h1 style="font:600 46px/1.06 'Archivo',sans-serif;letter-spacing:-.025em;max-width:30ch">The same pages, laid out for a laptop and for a phone.</h1>
+</div>
+<p style="font:400 17px/1.55 'Archivo',sans-serif;color:#3A4030;max-width:52ch">Both frames are the live site, not screenshots. Click through the nav in either one and it responds.</p>
+</div>
+
+<div style="display:flex;gap:56px;align-items:flex-start">
+
+<div style="flex:none">
+<div style="display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;margin-bottom:16px">
+<h2 style="font:600 22px/1.2 'Archivo',sans-serif;letter-spacing:-.015em">Laptop</h2>
+<span style="font:400 15px/1.4 'Archivo',sans-serif;color:#5C6152">1440 wide. Three room cards across, rate table in full, FAQs beside a sticky booking rail.</span>
+</div>
+<x-import component-from-global-scope="ChromeWindow" from="./browser-window.jsx" width="{{ deskW }}" height="{{ deskH }}" url="rhfguesthouse.com" hint-size="1440px,940px">
+<iframe src="RHF Guesthouse Website.dc.html" title="RHF Guesthouse at laptop width" style="width:100%;height:100%;border:0;display:block;background:#F5F3EC"></iframe>
+</x-import>
+</div>
+
+<div style="flex:none">
+<div style="display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;margin-bottom:16px">
+<h2 style="font:600 22px/1.2 'Archivo',sans-serif;letter-spacing:-.015em">Phone</h2>
+<span style="font:400 15px/1.4 'Archivo',sans-serif;color:#5C6152;max-width:34ch">402 wide. One column, the six pages behind a Menu button that opens from the right, taps 44px and up.</span>
+</div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ phoneW }}" height="{{ phoneH }}" hint-size="402px,874px">
+<div style="height:100%;padding:54px 0 34px">
+<iframe src="RHF Guesthouse Website.dc.html" title="RHF Guesthouse at phone width" style="width:100%;height:100%;border:0;display:block;background:#F5F3EC"></iframe>
+</div>
+</x-import>
+</div>
+
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 40px;border-top:1px solid #1A2016;max-width:1560px">
+<div style="font:400 16px/1.5 'Archivo',sans-serif">
+<div style="font:600 13px/1.3 'Archivo',sans-serif;letter-spacing:.06em;color:#5C6152;padding:16px 0 8px">WHAT FOLDS</div>
+<p style="color:#3A4030;padding-bottom:16px">Room cards go three across to one. The two-column FAQ page drops its booking rail underneath the questions. Below 900px the six nav links move into a panel that slides in from the right, with the current page marked and both phone numbers at the foot of it.</p>
+</div>
+<div style="font:400 16px/1.5 'Archivo',sans-serif">
+<div style="font:600 13px/1.3 'Archivo',sans-serif;letter-spacing:.06em;color:#5C6152;padding:16px 0 8px">WHAT SCROLLS</div>
+<p style="color:#3A4030;padding-bottom:16px">The rate table scrolls sideways with the row labels held in place, so a phone guest still compares Business against Luxury without pinching.</p>
+</div>
+<div style="font:400 16px/1.5 'Archivo',sans-serif">
+<div style="font:600 13px/1.3 'Archivo',sans-serif;letter-spacing:.06em;color:#5C6152;padding:16px 0 8px">WHAT NEVER MOVES</div>
+<p style="color:#3A4030;padding-bottom:16px">Book now sits at the right of the header at every width, and a booking band closes every page. Prices carry VAT wherever they appear.</p>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return { deskW: 1440, deskH: 940, phoneW: 402, phoneH: 874 };
+  }
+}
+</script>
+</body>
+</html>

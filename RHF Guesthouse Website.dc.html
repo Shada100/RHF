@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:#F5F3EC;color:#1A2016;font-family:'Archivo','Helvetica Neue',Helvetica,sans-serif;-webkit-font-smoothing:antialiased;text-wrap:pretty}
+a{color:#3D4A31;text-decoration:none}
+a:hover{color:#1A2016}
+h1,h2,h3,h4,p,ul,li,figure,table{margin:0}
+</style>
+</helmet>
+
+<div style="background:#F5F3EC;min-height:100vh">
+
+<div style="background:#2E3A26;color:#EFECE1;padding:9px 4vw;display:flex;flex-wrap:wrap;gap:8px 26px;align-items:center;justify-content:space-between;font:400 13px/1.5 'Archivo',sans-serif">
+<span style="color:#CBD1BE">House 388, Apo Resettlement, Zone A, Apo, Abuja, FCT</span>
+<span style="display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center">
+<a href="tel:+2348023804982" style="color:#EFECE1">0802 380 4982</a>
+<a href="tel:+2347013112962" style="color:#EFECE1">0701 311 2962</a>
+<a href="mailto:rhfguesthouseltd@gmail.com" style="color:#EFECE1">rhfguesthouseltd@gmail.com</a>
+</span>
+</div>
+
+<div style="background:#F5F3EC;border-bottom:1px solid #1A2016;padding:8px 4vw;position:sticky;top:0;z-index:30">
+<div style="max-width:1440px;margin:0 auto;display:flex;gap:16px;align-items:center">
+<img src="assets/rhf-logo.png" alt="RHF Guesthouse" style="height:38px;width:auto;display:block;flex:none">
+<sc-if value="{{ wideNav }}" hint-placeholder-val="{{ true }}">
+<div style="flex:1 1 auto;min-width:0;display:flex;gap:24px;align-items:center;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch">
+<a href="#" onClick="{{ goHome }}" style="position:relative;flex:none;margin-left:auto;white-space:nowrap;font:500 15px/1 'Archivo',sans-serif;color:#1A2016;height:44px;display:flex;align-items:center">Home<sc-if value="{{ atHome }}"><span style="position:absolute;left:0;right:0;bottom:9px;height:2px;background:#6B7C51"></span></sc-if></a>
+<a href="#" onClick="{{ goRooms }}" style="position:relative;flex:none;white-space:nowrap;font:500 15px/1 'Archivo',sans-serif;color:#1A2016;height:44px;display:flex;align-items:center">Rooms<sc-if value="{{ atRooms }}"><span style="position:absolute;left:0;right:0;bottom:9px;height:2px;background:#6B7C51"></span></sc-if></a>
+<a href="#" onClick="{{ goFacilities }}" style="position:relative;flex:none;white-space:nowrap;font:500 15px/1 'Archivo',sans-serif;color:#1A2016;height:44px;display:flex;align-items:center">Facilities<sc-if value="{{ atFacilities }}"><span style="position:absolute;left:0;right:0;bottom:9px;height:2px;background:#6B7C51"></span></sc-if></a>
+<a href="#" onClick="{{ goLocation }}" style="position:relative;flex:none;white-space:nowrap;font:500 15px/1 'Archivo',sans-serif;color:#1A2016;height:44px;display:flex;align-items:center">Location<sc-if value="{{ atLocation }}"><span style="position:absolute;left:0;right:0;bottom:9px;height:2px;background:#6B7C51"></span></sc-if></a>
+<a href="#" onClick="{{ goFaqs }}" style="position:relative;flex:none;white-space:nowrap;font:500 15px/1 'Archivo',sans-serif;color:#1A2016;height:44px;display:flex;align-items:center">FAQs<sc-if value="{{ atFaqs }}"><span style="position:absolute;left:0;right:0;bottom:9px;height:2px;background:#6B7C51"></span></sc-if></a>
+<a href="#" onClick="{{ goContact }}" style="position:relative;flex:none;white-space:nowrap;font:500 15px/1 'Archivo',sans-serif;color:#1A2016;height:44px;display:flex;align-items:center">Contact<sc-if value="{{ atContact }}"><span style="position:absolute;left:0;right:0;bottom:9px;height:2px;background:#6B7C51"></span></sc-if></a>
+</div>
+</sc-if>
+<sc-if value="{{ narrowNav }}">
+<a href="#" onClick="{{ openMenu }}" aria-label="Open the menu" style="flex:none;margin-left:auto;border:1px solid #1A2016;color:#1A2016;font:600 14px/1 'Archivo',sans-serif;height:44px;padding:0 14px;border-radius:2px;display:flex;align-items:center;gap:9px">
+<span style="display:flex;flex-direction:column;gap:4px;width:17px">
+<span style="display:block;height:2px;background:#1A2016"></span>
+<span style="display:block;height:2px;background:#1A2016"></span>
+<span style="display:block;height:2px;background:#1A2016"></span>
+</span>
+Menu
+</a>
+</sc-if>
+<a href="#" onClick="{{ goBook }}" style="flex:none;background:#2E3A26;color:#F5F3EC;font:600 15px/1 'Archivo',sans-serif;padding:0 20px;border-radius:2px;height:44px;display:flex;align-items:center;white-space:nowrap">Book now</a>
+</div>
+</div>
+
+<sc-if value="{{ menuOpen }}">
+<div style="position:fixed;inset:0;z-index:40;display:flex;justify-content:flex-end">
+<a href="#" onClick="{{ closeMenu }}" aria-label="Close the menu" style="position:absolute;inset:0;background:rgba(20,26,16,.55)"></a>
+<div style="position:relative;background:#F5F3EC;width:min(84vw,340px);height:100%;overflow-y:auto;padding:18px 22px 26px;box-shadow:-24px 0 60px rgba(20,26,16,.3);display:flex;flex-direction:column">
+<div style="display:flex;gap:16px;align-items:center;justify-content:space-between;margin-bottom:18px">
+<img src="assets/rhf-logo.png" alt="RHF Guesthouse" style="height:34px;width:auto;display:block">
+<a href="#" onClick="{{ closeMenu }}" aria-label="Close the menu" style="flex:none;border:1px solid #1A2016;color:#1A2016;font:600 14px/1 'Archivo',sans-serif;height:44px;padding:0 16px;border-radius:2px;display:flex;align-items:center">Close</a>
+</div>
+<div style="border-top:1px solid #1A2016">
+<a href="#" onClick="{{ goHome }}" style="display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid #DCD6C6;font:500 20px/1.2 'Archivo',sans-serif;color:#1A2016;min-height:60px;padding:8px 0">Home<sc-if value="{{ atHome }}"><span style="font:600 12px/1 'Archivo',sans-serif;letter-spacing:.06em;color:#6B7C51">YOU ARE HERE</span></sc-if></a>
+<a href="#" onClick="{{ goRooms }}" style="display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid #DCD6C6;font:500 20px/1.2 'Archivo',sans-serif;color:#1A2016;min-height:60px;padding:8px 0">Rooms<sc-if value="{{ atRooms }}"><span style="font:600 12px/1 'Archivo',sans-serif;letter-spacing:.06em;color:#6B7C51">YOU ARE HERE</span></sc-if></a>
+<a href="#" onClick="{{ goFacilities }}" style="display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid #DCD6C6;font:500 20px/1.2 'Archivo',sans-serif;color:#1A2016;min-height:60px;padding:8px 0">Facilities<sc-if value="{{ atFacilities }}"><span style="font:600 12px/1 'Archivo',sans-serif;letter-spacing:.06em;color:#6B7C51">YOU ARE HERE</span></sc-if></a>
+<a href="#" onClick="{{ goLocation }}" style="display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid #DCD6C6;font:500 20px/1.2 'Archivo',sans-serif;color:#1A2016;min-height:60px;padding:8px 0">Location<sc-if value="{{ atLocation }}"><span style="font:600 12px/1 'Archivo',sans-serif;letter-spacing:.06em;color:#6B7C51">YOU ARE HERE</span></sc-if></a>
+<a href="#" onClick="{{ goFaqs }}" style="display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid #DCD6C6;font:500 20px/1.2 'Archivo',sans-serif;color:#1A2016;min-height:60px;padding:8px 0">FAQs<sc-if value="{{ atFaqs }}"><span style="font:600 12px/1 'Archivo',sans-serif;letter-spacing:.06em;color:#6B7C51">YOU ARE HERE</span></sc-if></a>
+<a href="#" onClick="{{ goContact }}" style="display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid #DCD6C6;font:500 20px/1.2 'Archivo',sans-serif;color:#1A2016;min-height:60px;padding:8px 0">Contact<sc-if value="{{ atContact }}"><span style="font:600 12px/1 'Archivo',sans-serif;letter-spacing:.06em;color:#6B7C51">YOU ARE HERE</span></sc-if></a>
+</div>
+<a href="#" onClick="{{ goBook }}" style="background:#2E3A26;color:#F5F3EC;font:600 16px/1 'Archivo',sans-serif;height:52px;border-radius:2px;display:flex;align-items:center;justify-content:center;margin-top:22px">Book now</a>
+<div style="margin-top:auto;padding-top:26px;font:400 15px/1.7 'Archivo',sans-serif;color:#3A4030">
+<div style="font:600 12.5px/1.3 'Archivo',sans-serif;letter-spacing:.06em;color:#5C6152;margin-bottom:8px">THE DESK IS STAFFED 24 HOURS</div>
+<a href="tel:+2348023804982" style="display:block;font-weight:600;color:#3D4A31">0802 380 4982</a>
+<a href="tel:+2347013112962" style="display:block;font-weight:600;color:#3D4A31">0701 311 2962</a>
+<span style="display:block;margin-top:8px">House 388, Apo Resettlement, Zone A, Apo, Abuja</span>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ atHome }}" hint-placeholder-val="{{ true }}">
+<div>
+
+<div style="position:relative;background:#2E3A26">
+<img src="assets/front-view.jpg" alt="The front of RHF Guesthouse, with parking inside the gate" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 62%;opacity:.62;display:block">
+<div style="position:absolute;inset:0;background:linear-gradient(100deg,rgba(20,26,16,.88) 0%,rgba(20,26,16,.74) 42%,rgba(20,26,16,.42) 100%)"></div>
+<div style="position:relative;padding:64px 4vw 72px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:44px;align-items:end;max-width:1440px;margin:0 auto">
+<div style="min-width:0">
+<div style="font:500 12.5px/1 'Archivo',sans-serif;letter-spacing:.09em;color:#B7C4A2;margin-bottom:16px">A HOME AWAY FROM HOME, APO, ABUJA</div>
+<h1 style="font:600 clamp(38px,5.2vw,62px)/1.03 'Archivo',sans-serif;font-stretch:112%;letter-spacing:-.02em;color:#FFFFFF">Eighteen guests, one quiet house, directly opposite Acropolis Park.</h1>
+<p style="font:300 clamp(18px,2vw,22px)/1.5 'Newsreader',Georgia,serif;color:#EFECE1;max-width:46ch;margin-top:20px">Three en-suite room types, a kitchen you may cook in, and a front desk that is staffed at every hour of the night. From <strong style="font-weight:500">&#8358;32,250</strong> a night with VAT already in it.</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px 12px;margin-top:26px;font:500 13.5px/1 'Archivo',sans-serif">
+<span style="border:1px solid #8C9A78;color:#EFECE1;padding:11px 14px;border-radius:2px">All rooms en-suite</span>
+<span style="border:1px solid #8C9A78;color:#EFECE1;padding:11px 14px;border-radius:2px">Parking inside the gate</span>
+<span style="border:1px solid #8C9A78;color:#EFECE1;padding:11px 14px;border-radius:2px">WiFi day and night</span>
+<span style="border:1px solid #8C9A78;color:#EFECE1;padding:11px 14px;border-radius:2px">Non-smoking house</span>
+</div>
+</div>
+<div style="min-width:0;background:#F5F3EC;border-radius:3px;padding:26px 26px 24px;box-shadow:0 24px 60px rgba(20,26,16,.34)">
+<h2 style="font:600 24px/1.15 'Archivo',sans-serif;letter-spacing:-.015em;color:#1A2016">Book now</h2>
+<p style="font:400 14.5px/1.5 'Archivo',sans-serif;color:#5C6152;margin-top:6px;margin-bottom:18px">One night minimum, no maximum. Every price you see is the number you will transfer.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px">
+<label style="display:block;min-width:0"><span style="display:block;font:500 12px/1 'Archivo',sans-serif;letter-spacing:.06em;color:#5C6152;margin-bottom:7px">ARRIVE</span><span style="display:block;background:#FFFFFF;border:1px solid #C9C3B1;border-radius:2px;font:400 16px/1.2 'Archivo',sans-serif;padding:15px 14px;min-height:48px">14 Oct 2026</span></label>
+<label style="display:block;min-width:0"><span style="display:block;font:500 12px/1 'Archivo',sans-serif;letter-spacing:.06em;color:#5C6152;margin-bottom:7px">DEPART</span><span style="display:block;background:#FFFFFF;border:1px solid #C9C3B1;border-radius:2px;font:400 16px/1.2 'Archivo',sans-serif;padding:15px 14px;min-height:48px">17 Oct 2026</span></label>
+<label style="display:block;min-width:0"><span style="display:block;font:500 12px/1 'Archivo',sans-serif;letter-spacing:.06em;color:#5C6152;margin-bottom:7px">GUESTS</span><span style="display:block;background:#FFFFFF;border:1px solid #C9C3B1;border-radius:2px;font:400 16px/1.2 'Archivo',sans-serif;padding:15px 14px;min-height:48px">2</span></label>
+<label style="display:block;min-width:0"><span style="display:block;font:500 12px/1 'Archivo',sans-serif;letter-spacing:.06em;color:#5C6152;margin-bottom:7px">ROOM</span><span style="display:block;background:#FFFFFF;border:1px solid #C9C3B1;border-radius:2px;font:400 16px/1.2 'Archivo',sans-serif;padding:15px 14px;min-height:48px">Any room</span></label>
+</div>
+<a href="#" onClick="{{ goBook }}" style="display:flex;align-items:center;justify-content:center;background:#2E3A26;color:#F5F3EC;font:600 16px/1 'Archivo',sans-serif;padding:18px 20px;border-radius:2px;margin-top:16px;min-height:52px">Book now</a>
+<p style="font:400 13.5px/1.5 'Archivo',sans-serif;color:#5C6152;margin-top:12px">Three nights in the Executive comes to &#8358;129,000 in total. Payment is by bank transfer.</p>
+</div>
+</div>
+</div>
+
+<div style="background:#EAE5D7;border-bottom:1px solid #DCD6C6;padding:34px 4vw;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:28px;max-width:1440px;margin:0 auto">
+<div><div style="font:600 38px/1 'Archivo',sans-serif;letter-spacing:-.03em;color:#6B7C51">18</div><p style="font:400 16px/1.5 'Newsreader',Georgia,serif;color:#3A4030;margin-top:8px">guests in the whole house, so the desk learns your name by the second morning</p></div>
+<div><div style="font:600 38px/1 'Archivo',sans-serif;letter-spacing:-.03em;color:#6B7C51">24</div><p style="font:400 16px/1.5 'Newsreader',Georgia,serif;color:#3A4030;margin-top:8px">hours. The desk and the gate are staffed, including three in the morning</p></div>
+<div><div style="font:600 38px/1 'Archivo',sans-serif;letter-spacing:-.03em;color:#6B7C51">3</div><p style="font:400 16px/1.5 'Newsreader',Georgia,serif;color:#3A4030;margin-top:8px">room types, all en-suite, all sleeping two, from &#8358;32,250 VAT included</p></div>
+<div><div style="font:600 38px/1 'Archivo',sans-serif;letter-spacing:-.03em;color:#6B7C51">40</div><p style="font:400 16px/1.5 'Newsreader',Georgia,serif;color:#3A4030;margin-top:8px">minutes by road from Nnamdi Azikiwe airport, on a quiet Apo street</p></div>
+</div>
+
+<div style="max-width:1440px;margin:0 auto;padding:64px 4vw 12px">
+<div style="display:flex;flex-wrap:wrap;gap:16px 32px;align-items:flex-end;justify-content:space-between;margin-bottom:28px">
+<div style="min-width:0">
+<div style="font:500 12.5px/1 'Archivo',sans-serif;letter-spacing:.09em;color:#6B7C51;margin-bottom:12px">THE ROOMS</div>
+<h2 style="font:600 clamp(30px,3.6vw,42px)/1.06 'Archivo',sans-serif;letter-spacing:-.025em;max-width:24ch">Compare all three, then book the one you want.</h2>
+</div>
+<a href="#" onClick="{{ goRooms }}" style="border:1px solid #1A2016;color:#1A2016;font:600 15px/1 'Archivo',sans-serif;padding:15px 22px;border-radius:2px;min-height:44px;display:flex;align-items:center;flex:none">See the full rate card</a>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px">
+
+<div style="background:#FFFFFF;border:1px solid #DCD6C6;border-radius:3px;overflow:hidden;display:flex;flex-direction:column;min-width:0">
+<img src="assets/room-business.jpg" alt="Business Room" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block">
+<div style="padding:22px 22px 24px;display:flex;flex-direction:column;gap:16px;flex:1">
+<div>
+<div style="display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline;justify-content:space-between">
+<h3 style="font:600 25px/1.1 'Archivo',sans-serif;letter-spacing:-.02em">Business</h3>
+<div style="font:600 25px/1 'Archivo',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:#2E3A26">&#8358;32,250</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px 12px;justify-content:space-between;font:400 13.5px/1.4 'Archivo',sans-serif;color:#5C6152;margin-top:6px"><span>500 ft&#178;, sleeps two</span><span>a night, VAT in</span></div>
+</div>
+<div style="border-top:1px solid #DCD6C6;font:400 15px/1.4 'Archivo',sans-serif;color:#3A4030">
+<div style="display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #EFEBDE"><span>Bed</span><span style="font-weight:500">1 double</span></div>
+<div style="display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #EFEBDE"><span>Bathroom</span><span style="font-weight:500">En-suite</span></div>
+<div style="display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #EFEBDE"><span>Desk, TV, air conditioning</span><span style="font-weight:500">yes</span></div>
+<div style="display:flex;justify-content:space-between;gap:12px;padding:10px 0"><span>Fridge</span><span style="color:#8A8F7E">no</span></div>
+</div>
+<p style="font:400 16px/1.55 'Newsreader',Georgia,serif;color:#3A4030">The one to take for a working week. Quiet street, a desk you can actually sit at, and the lowest rate in the house.</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:auto">
+<a href="#" onClick="{{ goBook }}" style="flex:1 1 130px;background:#2E3A26;color:#F5F3EC;font:600 15px/1 'Archivo',sans-serif;padding:16px 18px;border-radius:2px;text-align:center;min-height:48px;display:flex;align-items:center;justify-content:center">Book now</a>
+<a href="#" onClick="{{ goRooms }}" style="flex:1 1 110px;border:1px solid #1A2016;color:#1A2016;font:600 15px/1 'Archivo',sans-serif;padding:15px 18px;border-radius:2px;text-align:center;min-height:48px;display:flex;align-items:center;justify-content:center">See the room</a>
+</div>
+</div>
+</div>
+
+<div style="background:#FFFFFF;border:1px solid #6B7C51;border-radius:3px;overflow:hidden;display:flex;flex-direction:column;min-width:0">
+<div style="position:relative">
+<img src="assets/room-executive.jpg" alt="Executive Room" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block">
+<span style="position:absolute;left:0;top:16px;background:#6B7C51;color:#FFFFFF;font:600 12px/1 'Archivo',sans-serif;letter-spacing:.07em;padding:9px 14px">MOST BOOKED</span>
+</div>
+<div style="padding:22px 22px 24px;display:flex;flex-direction:column;gap:16px;flex:1">
+<div>
+<div style="display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline;justify-content:space-between">
+<h3 style="font:600 25px/1.1 'Archivo',sans-serif;letter-spacing:-.02em">Executive</h3>
+<div style="font:600 25px/1 'Archivo',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:#2E3A26">&#8358;43,000</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px 12px;justify-content:space-between;font:400 13.5px/1.4 'Archivo',sans-serif;color:#5C6152;margin-top:6px"><span>600 ft&#178;, sleeps two</span><span>a night, VAT in</span></div>
+</div>
+<div style="border-top:1px solid #DCD6C6;font:400 15px/1.4 'Archivo',sans-serif;color:#3A4030">
+<div style="display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #EFEBDE"><span>Bed</span><span style="font-weight:500">1 queen</span></div>
+<div style="display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #EFEBDE"><span>Bathroom</span><span style="font-weight:500">En-suite</span></div>
+<div style="display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #EFEBDE"><span>Desk, TV, air conditioning</span><span style="font-weight:500">yes</span></div>
+<div style="display:flex;justify-content:space-between;gap:12px;padding:10px 0"><span>Fridge</span><span style="font-weight:600;color:#3D4A31">yes</span></div>
+</div>
+<p style="font:400 16px/1.55 'Newsreader',Georgia,serif;color:#3A4030">A hundred square feet more, a bigger bed and a fridge. The middle room, and the one most guests end up in.</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:auto">
+<a href="#" onClick="{{ goBook }}" style="flex:1 1 130px;background:#2E3A26;color:#F5F3EC;font:600 15px/1 'Archivo',sans-serif;padding:16px 18px;border-radius:2px;text-align:center;min-height:48px;display:flex;align-items:center;justify-content:center">Book now</a>
+<a href="#" onClick="{{ goRooms }}" style="flex:1 1 110px;border:1px solid #1A2016;color:#1A2016;font:600 15px/1 'Archivo',sans-serif;padding:15px 18px;border-radius:2px;text-align:center;min-height:48px;display:flex;align-items:center;justify-content:center">See the room</a>
+</div>
+</div>
+</div>
+
+<div style="background:#FFFFFF;border:1px solid #DCD6C6;border-radius:3px;overflow:hidden;display:flex;flex-direction:column;min-width:0">
+<img src="assets/room-luxury.jpg" alt="Luxury Room" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block">
+<div style="padding:22px 22px 24px;display:flex;flex-direction:column;gap:16px;flex:1">
+<div>
+<div style="display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline;justify-content:space-between">
+<h3 style="font:600 25px/1.1 'Archivo',sans-serif;letter-spacing:-.02em">Luxury</h3>
+<div style="font:600 25px/1 'Archivo',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:#2E3A26">&#8358;53,750</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px 12px;justify-content:space-between;font:400 13.5px/1.4 'Archivo',sans-serif;color:#5C6152;margin-top:6px"><span>700 ft&#178;, sleeps two</span><span>a night, VAT in</span></div>
+</div>
+<div style="border-top:1px solid #DCD6C6;font:400 15px/1.4 'Archivo',sans-serif;color:#3A4030">
+<div style="display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #EFEBDE"><span>Bed</span><span style="font-weight:500">1 king</span></div>
+<div style="display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #EFEBDE"><span>Living room suite</span><span style="font-weight:600;color:#3D4A31">yes</span></div>
+<div style="display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #EFEBDE"><span>Breakfast on arrival</span><span style="font-weight:600;color:#3D4A31">included</span></div>
+<div style="display:flex;justify-content:space-between;gap:12px;padding:10px 0"><span>Fridge</span><span style="font-weight:500">yes</span></div>
+</div>
+<p style="font:400 16px/1.55 'Newsreader',Georgia,serif;color:#3A4030">The largest of the three, with a separate living room suite. Take it when you need to sit somebody down, or you are staying a while.</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:auto">
+<a href="#" onClick="{{ goBook }}" style="flex:1 1 130px;background:#2E3A26;color:#F5F3EC;font:600 15px/1 'Archivo',sans-serif;padding:16px 18px;border-radius:2px;text-align:center;min-height:48px;display:flex;align-items:center;justify-content:center">Book now</a>
+<a href="#" onClick="{{ goRooms }}" style="flex:1 1 110px;border:1px solid #1A2016;color:#1A2016;font:600 15px/1 'Archivo',sans-serif;padding:15px 18px;border-radius:2px;text-align:center;min-height:48px;display:flex;align-items:center;justify-content:center">See the room</a>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div style="max-width:1440px;margin:0 auto;padding:60px 4vw 0">
+<div style="font:500 12.5px/1 'Archivo',sans-serif;letter-spacing:.09em;color:#6B7C51;margin-bottom:12px">ARRIVING</div>
+<h2 style="font:600 clamp(28px,3.4vw,38px)/1.08 'Archivo',sans-serif;letter-spacing:-.025em;max-width:26ch">You should recognise our gate before you ever reach it.</h2>
+<p style="font:400 18px/1.55 'Newsreader',Georgia,serif;color:#3A4030;max-width:64ch;margin-top:14px">Acropolis Park &amp; Event Centre is directly across the road. These are the three frames a first-time guest needs: the house from the driveway, the gate with Acropolis behind you, and the desk you walk up to.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:26px">
+<figure style="margin:0">
+<img src="assets/front-view.jpg" alt="The front of the house from the driveway, with parking inside the gate" style="width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 58%;display:block;border-radius:3px">
+<figcaption style="font:400 14.5px/1.5 'Archivo',sans-serif;color:#5C6152;margin-top:10px">The house from the driveway. Parking is inside the gate.</figcaption>
+</figure>
+<div>
+<div style="aspect-ratio:4/3;background:#EAE5D7;border:1px dashed #A8A292;border-radius:3px;display:flex;align-items:center;justify-content:center;padding:20px;text-align:center">
+<span style="font:500 12.5px/1.6 'Archivo',sans-serif;letter-spacing:.05em;color:#5C6152">PHOTOGRAPH NEEDED<sc-if value="{{ showPhotoBriefs }}" hint-placeholder-val="{{ true }}"><span style="display:block;font:400 15px/1.5 'Newsreader',Georgia,serif;letter-spacing:0;color:#3A4030;margin-top:10px">The gate with the signage and Acropolis visible opposite. The frame that makes the directions make sense.</span></sc-if></span>
+</div>
+<div style="font:400 14.5px/1.5 'Archivo',sans-serif;color:#5C6152;margin-top:10px">The gate, with Acropolis across the road.</div>
+</div>
+<figure style="margin:0">
+<img src="assets/front-desk.jpg" alt="A guest signing in at the RHF Guesthouse front desk" style="width:100%;aspect-ratio:4/3;object-fit:cover;object-position:56% 50%;display:block;border-radius:3px">
+<figcaption style="font:400 14.5px/1.5 'Archivo',sans-serif;color:#5C6152;margin-top:10px">Reception. Somebody is on this desk at every hour of the night.</figcaption>
+</figure>
+</div>
+</div>
+
+<div style="max-width:1440px;margin:0 auto;padding:60px 4vw 0">
+<div style="font:500 12.5px/1 'Archivo',sans-serif;letter-spacing:.09em;color:#6B7C51;margin-bottom:12px">PRACTICAL INFORMATION</div>
+<div style="display:flex;flex-wrap:wrap;gap:16px 32px;align-items:flex-end;justify-content:space-between;margin-bottom:24px">
+<h2 style="font:600 clamp(28px,3.4vw,38px)/1.08 'Archivo',sans-serif;letter-spacing:-.025em;max-width:24ch">Everything you would otherwise have to ring and ask.</h2>
+<a href="#" onClick="{{ goFaqs }}" style="border:1px solid #1A2016;color:#1A2016;font:600 15px/1 'Archivo',sans-serif;padding:15px 22px;border-radius:2px;min-height:44px;display:flex;align-items:center;flex:none">All the questions</a>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0 40px;border-top:1px solid #1A2016">
+<div style="font:400 16px/1.45 'Archivo',sans-serif">
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:14px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">Check-in and check-out</span><span style="color:#3D4A31;font-weight:600">[CLIENT TO CONFIRM]</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:14px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">Payment</span><span style="color:#3A4030;text-align:right">Bank transfer only</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:14px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">Cancellation and refunds</span><span style="color:#3D4A31;font-weight:600">[CLIENT TO CONFIRM]</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:14px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">WiFi</span><span style="color:#3A4030;text-align:right">In every room, day and night</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:14px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">Parking</span><span style="color:#3A4030;text-align:right">Inside the gate, security on site</span></div>
+</div>
+<div style="font:400 16px/1.45 'Archivo',sans-serif">
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:14px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">Housekeeping and laundry</span><span style="color:#3A4030;text-align:right">Both a service, daily</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:14px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">Smoking</span><span style="color:#3A4030;text-align:right">Non-smoking throughout</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:14px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">Children</span><span style="color:#3A4030;text-align:right">Family friendly</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:14px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">Step-free access</span><span style="color:#3D4A31;font-weight:600">[CLIENT TO CONFIRM]</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:14px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">Light and water</span><span style="color:#3D4A31;font-weight:600">[CLIENT TO CONFIRM]</span></div>
+</div>
+</div>
+</div>
+
+<sc-if value="{{ showLongStay }}" hint-placeholder-val="{{ true }}">
+<div style="max-width:1440px;margin:60px auto 0;padding:0 4vw">
+<div style="background:#2E3A26;color:#EFECE1;border-radius:3px;padding:44px 5% 46px">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:36px;align-items:start">
+<div style="min-width:0">
+<div style="font:500 12.5px/1 'Archivo',sans-serif;letter-spacing:.09em;color:#B7C4A2;margin-bottom:12px">STAYING A WHILE</div>
+<h2 style="font:600 clamp(26px,3vw,34px)/1.1 'Archivo',sans-serif;letter-spacing:-.02em;color:#FFFFFF;max-width:22ch">A kitchen is dull for one night and the whole argument for three weeks.</h2>
+<p style="font:300 18px/1.55 'Newsreader',Georgia,serif;color:#DDE1D2;max-width:52ch;margin-top:14px">Contractors on a project, an NGO posting, a family between houses, somebody home from abroad for a month. Bookings start at one night and have no maximum.</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:24px">
+<a href="#" onClick="{{ goContact }}" style="background:#F5F3EC;color:#1A2016;font:600 15px/1 'Archivo',sans-serif;padding:17px 22px;border-radius:2px;min-height:48px;display:flex;align-items:center">Ask about a long stay</a>
+<a href="#" onClick="{{ goFacilities }}" style="border:1px solid #8C9A78;color:#EFECE1;font:600 15px/1 'Archivo',sans-serif;padding:16px 21px;border-radius:2px;min-height:48px;display:flex;align-items:center">See the facilities</a>
+</div>
+</div>
+<div style="min-width:0;font:400 16px/1.4 'Archivo',sans-serif;border-top:1px solid #4A5540">
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:14px 0;border-bottom:1px solid #4A5540"><span style="font-weight:600;color:#FFFFFF">A kitchen you can cook in</span><span style="color:#C5CBB8">fully equipped, yours to use</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:14px 0;border-bottom:1px solid #4A5540"><span style="font-weight:600;color:#FFFFFF">Laundry and housekeeping</span><span style="color:#C5CBB8">a service, not a machine in a cupboard</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:14px 0;border-bottom:1px solid #4A5540"><span style="font-weight:600;color:#FFFFFF">A mini-mart on site</span><span style="color:#C5CBB8">for what you forget on a long stay</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:14px 0;border-bottom:1px solid #4A5540"><span style="font-weight:600;color:#FFFFFF">Weekly and monthly rates</span><span style="color:#B7C4A2;font-weight:600">[CLIENT TO CONFIRM]</span></div>
+</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<div style="max-width:1440px;margin:0 auto;padding:60px 4vw 0">
+<div style="font:500 12.5px/1 'Archivo',sans-serif;letter-spacing:.09em;color:#6B7C51;margin-bottom:12px">LOCATION</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:36px;align-items:start">
+<div style="min-width:0">
+<h2 style="font:600 clamp(28px,3.4vw,38px)/1.08 'Archivo',sans-serif;letter-spacing:-.025em;max-width:22ch">House 388, Apo Resettlement, Zone A.</h2>
+<p style="font:400 18px/1.6 'Newsreader',Georgia,serif;color:#3A4030;max-width:58ch;margin-top:14px">Forty minutes by road from Nnamdi Azikiwe. Come onto Airport Road heading towards town, turn off for Apo, then ask for Apo Resettlement, Zone A. Any driver who knows Acropolis knows our gate, and if you end up going in circles, ring us and we will talk you in.</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:22px">
+<a href="#" onClick="{{ goLocation }}" style="background:#2E3A26;color:#F5F3EC;font:600 15px/1 'Archivo',sans-serif;padding:17px 22px;border-radius:2px;min-height:48px;display:flex;align-items:center">Get directions</a>
+<a href="tel:+2348023804982" style="border:1px solid #1A2016;color:#1A2016;font:600 15px/1 'Archivo',sans-serif;padding:16px 21px;border-radius:2px;min-height:48px;display:flex;align-items:center">Call 0802 380 4982</a>
+</div>
+</div>
+<div style="min-width:0;font:400 16px/1.45 'Archivo',sans-serif;border-top:1px solid #1A2016">
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:14px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">Acropolis Park &amp; Event Centre</span><span style="color:#3A4030">directly opposite, on foot</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:14px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">Nnamdi Azikiwe airport</span><span style="color:#3A4030">about 40 minutes by road</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:14px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">Airport pickup</span><span style="color:#3A4030">we do not run one</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:14px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">Parking</span><span style="color:#3A4030">inside the gate</span></div>
+</div>
+</div>
+<div style="margin-top:28px;aspect-ratio:21/9;background:#EAE5D7;border:1px dashed #A8A292;border-radius:3px;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center">
+<span style="font:500 12.5px/1.6 'Archivo',sans-serif;letter-spacing:.05em;color:#5C6152">MAP<sc-if value="{{ showPhotoBriefs }}" hint-placeholder-val="{{ true }}"><span style="display:block;font:400 16px/1.5 'Newsreader',Georgia,serif;letter-spacing:0;color:#3A4030;margin-top:10px;max-width:44ch">Static tile with our gate marked and Acropolis labelled across the road. Placed here, below the directions, rather than in the hero.</span></sc-if></span>
+</div>
+</div>
+
+</div>
+</sc-if>
+
+<sc-if value="{{ atRooms }}">
+<div>
+<div style="background:#EAE5D7;border-bottom:1px solid #DCD6C6;padding:44px 4vw 40px">
+<div style="max-width:1440px;margin:0 auto">
+<div style="font:500 12.5px/1 'Archivo',sans-serif;letter-spacing:.09em;color:#6B7C51;margin-bottom:12px">ROOMS AND RATES</div>
+<h1 style="font:600 clamp(32px,4.4vw,52px)/1.04 'Archivo',sans-serif;letter-spacing:-.025em;max-width:26ch">Three rooms. Here is exactly what changes between them.</h1>
+<p style="font:400 18px/1.6 'Newsreader',Georgia,serif;color:#3A4030;max-width:66ch;margin-top:14px">All three sleep two and all three are en-suite. Every rate below includes VAT, so the number you read is the number you transfer.</p>
+</div>
+</div>
+
+<div style="max-width:1440px;margin:0 auto;padding:44px 4vw 0">
+<div style="overflow-x:auto;border:1px solid #1A2016;border-radius:3px;background:#FFFFFF">
+<table style="border-collapse:collapse;width:100%;min-width:760px;font:400 16px/1.4 'Archivo',sans-serif">
+<thead>
+<tr style="background:#2E3A26;color:#EFECE1">
+<th style="text-align:left;padding:16px 20px;font:500 13px/1.3 'Archivo',sans-serif;letter-spacing:.06em;width:30%">COMPARE</th>
+<th style="text-align:left;padding:16px 20px;font:600 20px/1.15 'Archivo',sans-serif;letter-spacing:-.01em">Business</th>
+<th style="text-align:left;padding:16px 20px;font:600 20px/1.15 'Archivo',sans-serif;letter-spacing:-.01em;background:#3D4A31">Executive</th>
+<th style="text-align:left;padding:16px 20px;font:600 20px/1.15 'Archivo',sans-serif;letter-spacing:-.01em">Luxury</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom:1px solid #DCD6C6">
+<td style="padding:16px 20px;font-weight:600">A night, VAT included</td>
+<td style="padding:16px 20px;font:600 24px/1 'Archivo',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.02em">&#8358;32,250</td>
+<td style="padding:16px 20px;font:600 24px/1 'Archivo',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.02em;background:#F2F1E6">&#8358;43,000</td>
+<td style="padding:16px 20px;font:600 24px/1 'Archivo',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.02em">&#8358;53,750</td>
+</tr>
+<tr style="border-bottom:1px solid #DCD6C6">
+<td style="padding:13px 20px;font-weight:600">Three nights, in total</td>
+<td style="padding:13px 20px;font-variant-numeric:tabular-nums">&#8358;96,750</td>
+<td style="padding:13px 20px;font-variant-numeric:tabular-nums;background:#F2F1E6">&#8358;129,000</td>
+<td style="padding:13px 20px;font-variant-numeric:tabular-nums">&#8358;161,250</td>
+</tr>
+<tr style="border-bottom:1px solid #DCD6C6">
+<td style="padding:13px 20px;font-weight:600">Floor area</td>
+<td style="padding:13px 20px;font-variant-numeric:tabular-nums">500 ft&#178;</td>
+<td style="padding:13px 20px;font-variant-numeric:tabular-nums;background:#F2F1E6">600 ft&#178;</td>
+<td style="padding:13px 20px;font-variant-numeric:tabular-nums">700 ft&#178;</td>
+</tr>
+<tr style="border-bottom:1px solid #DCD6C6">
+<td style="padding:13px 20px;font-weight:600">Sleeps</td>
+<td style="padding:13px 20px">2</td>
+<td style="padding:13px 20px;background:#F2F1E6">2</td>
+<td style="padding:13px 20px">2</td>
+</tr>
+<tr style="border-bottom:1px solid #DCD6C6">
+<td style="padding:13px 20px;font-weight:600">Bed</td>
+<td style="padding:13px 20px">1 double</td>
+<td style="padding:13px 20px;background:#F2F1E6">1 queen</td>
+<td style="padding:13px 20px;font-weight:600">1 king</td>
+</tr>
+<tr style="border-bottom:1px solid #DCD6C6">
+<td style="padding:13px 20px;font-weight:600">En-suite bathroom</td>
+<td style="padding:13px 20px">yes</td>
+<td style="padding:13px 20px;background:#F2F1E6">yes</td>
+<td style="padding:13px 20px">yes</td>
+</tr>
+<tr style="border-bottom:1px solid #DCD6C6">
+<td style="padding:13px 20px;font-weight:600">Study desk</td>
+<td style="padding:13px 20px">yes</td>
+<td style="padding:13px 20px;background:#F2F1E6">yes</td>
+<td style="padding:13px 20px">yes</td>
+</tr>
+<tr style="border-bottom:1px solid #DCD6C6">
+<td style="padding:13px 20px;font-weight:600">Television and air conditioning</td>
+<td style="padding:13px 20px">yes</td>
+<td style="padding:13px 20px;background:#F2F1E6">yes</td>
+<td style="padding:13px 20px">yes</td>
+</tr>
+<tr style="border-bottom:1px solid #DCD6C6">
+<td style="padding:13px 20px;font-weight:600">Fridge</td>
+<td style="padding:13px 20px;color:#8A8F7E">no</td>
+<td style="padding:13px 20px;background:#F2F1E6;font-weight:600;color:#3D4A31">yes</td>
+<td style="padding:13px 20px;font-weight:600;color:#3D4A31">yes</td>
+</tr>
+<tr style="border-bottom:1px solid #DCD6C6">
+<td style="padding:13px 20px;font-weight:600">Living room suite</td>
+<td style="padding:13px 20px;color:#8A8F7E">no</td>
+<td style="padding:13px 20px;background:#F2F1E6;color:#8A8F7E">no</td>
+<td style="padding:13px 20px;font-weight:600;color:#3D4A31">yes</td>
+</tr>
+<tr style="border-bottom:1px solid #DCD6C6">
+<td style="padding:13px 20px;font-weight:600">Breakfast on arrival</td>
+<td style="padding:13px 20px;color:#8A8F7E">no</td>
+<td style="padding:13px 20px;background:#F2F1E6;color:#8A8F7E">no</td>
+<td style="padding:13px 20px;font-weight:600;color:#3D4A31">included</td>
+</tr>
+<tr>
+<td style="padding:18px 20px;font:400 14px/1.45 'Archivo',sans-serif;color:#5C6152">One night minimum, no maximum.</td>
+<td style="padding:18px 20px"><a href="#" onClick="{{ goBook }}" style="display:inline-flex;align-items:center;background:#2E3A26;color:#F5F3EC;font:600 15px/1 'Archivo',sans-serif;padding:16px 20px;border-radius:2px;min-height:48px">Book now</a></td>
+<td style="padding:18px 20px;background:#F2F1E6"><a href="#" onClick="{{ goBook }}" style="display:inline-flex;align-items:center;background:#2E3A26;color:#F5F3EC;font:600 15px/1 'Archivo',sans-serif;padding:16px 20px;border-radius:2px;min-height:48px">Book now</a></td>
+<td style="padding:18px 20px"><a href="#" onClick="{{ goBook }}" style="display:inline-flex;align-items:center;background:#2E3A26;color:#F5F3EC;font:600 15px/1 'Archivo',sans-serif;padding:16px 20px;border-radius:2px;min-height:48px">Book now</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p style="font:400 14px/1.5 'Archivo',sans-serif;color:#5C6152;margin-top:12px">On a narrow screen the card scrolls sideways. Row labels stay in place.</p>
+</div>
+
+<div style="max-width:1440px;margin:0 auto;padding:56px 4vw 0;display:flex;flex-direction:column;gap:40px">
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0;border:1px solid #DCD6C6;border-radius:3px;overflow:hidden;background:#FFFFFF">
+<img src="assets/room-business.jpg" alt="Business Room" style="width:100%;height:100%;min-height:280px;object-fit:cover;display:block">
+<div style="padding:32px 30px 34px;min-width:0">
+<div style="display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between">
+<h2 style="font:600 30px/1.08 'Archivo',sans-serif;letter-spacing:-.025em">Business Room</h2>
+<div style="text-align:right"><div style="font:600 28px/1 'Archivo',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:#2E3A26">&#8358;32,250</div><div style="font:400 13px/1.3 'Archivo',sans-serif;color:#5C6152;margin-top:4px">a night, VAT in</div></div>
+</div>
+<p style="font:400 17px/1.6 'Newsreader',Georgia,serif;color:#3A4030;margin-top:14px;max-width:60ch">Five hundred square feet, a double bed, an en-suite bathroom and a desk by the window. The room to take for a working week when you want the rate to stay sensible.</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;font:500 13.5px/1 'Archivo',sans-serif">
+<span style="background:#EAE5D7;color:#3A4030;padding:12px 14px;border-radius:2px">En-suite</span>
+<span style="background:#EAE5D7;color:#3A4030;padding:12px 14px;border-radius:2px">Study desk</span>
+<span style="background:#EAE5D7;color:#3A4030;padding:12px 14px;border-radius:2px">Television</span>
+<span style="background:#EAE5D7;color:#3A4030;padding:12px 14px;border-radius:2px">Air conditioning</span>
+<span style="background:#EAE5D7;color:#3A4030;padding:12px 14px;border-radius:2px">WiFi</span>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:24px">
+<a href="#" onClick="{{ goBook }}" style="background:#2E3A26;color:#F5F3EC;font:600 15px/1 'Archivo',sans-serif;padding:17px 24px;border-radius:2px;min-height:48px;display:flex;align-items:center">Book now</a>
+<a href="#" onClick="{{ goFaqs }}" style="border:1px solid #1A2016;color:#1A2016;font:600 15px/1 'Archivo',sans-serif;padding:16px 23px;border-radius:2px;min-height:48px;display:flex;align-items:center">What is included</a>
+</div>
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0;border:1px solid #6B7C51;border-radius:3px;overflow:hidden;background:#FFFFFF">
+<img src="assets/room-executive.jpg" alt="Executive Room" style="width:100%;height:100%;min-height:280px;object-fit:cover;display:block">
+<div style="padding:32px 30px 34px;min-width:0">
+<div style="font:600 12px/1 'Archivo',sans-serif;letter-spacing:.07em;color:#6B7C51;margin-bottom:10px">MOST BOOKED</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between">
+<h2 style="font:600 30px/1.08 'Archivo',sans-serif;letter-spacing:-.025em">Executive Room</h2>
+<div style="text-align:right"><div style="font:600 28px/1 'Archivo',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:#2E3A26">&#8358;43,000</div><div style="font:400 13px/1.3 'Archivo',sans-serif;color:#5C6152;margin-top:4px">a night, VAT in</div></div>
+</div>
+<p style="font:400 17px/1.6 'Newsreader',Georgia,serif;color:#3A4030;margin-top:14px;max-width:60ch">Six hundred square feet, a queen bed and a fridge in the room. The extra hundred feet is the difference between a room you sleep in and a room you can spend a Sunday in.</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;font:500 13.5px/1 'Archivo',sans-serif">
+<span style="background:#EAE5D7;color:#3A4030;padding:12px 14px;border-radius:2px">En-suite</span>
+<span style="background:#EAE5D7;color:#3A4030;padding:12px 14px;border-radius:2px">Queen bed</span>
+<span style="background:#EAE5D7;color:#3A4030;padding:12px 14px;border-radius:2px">Fridge</span>
+<span style="background:#EAE5D7;color:#3A4030;padding:12px 14px;border-radius:2px">Study desk</span>
+<span style="background:#EAE5D7;color:#3A4030;padding:12px 14px;border-radius:2px">Television</span>
+<span style="background:#EAE5D7;color:#3A4030;padding:12px 14px;border-radius:2px">Air conditioning</span>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:24px">
+<a href="#" onClick="{{ goBook }}" style="background:#2E3A26;color:#F5F3EC;font:600 15px/1 'Archivo',sans-serif;padding:17px 24px;border-radius:2px;min-height:48px;display:flex;align-items:center">Book now</a>
+<a href="#" onClick="{{ goFaqs }}" style="border:1px solid #1A2016;color:#1A2016;font:600 15px/1 'Archivo',sans-serif;padding:16px 23px;border-radius:2px;min-height:48px;display:flex;align-items:center">What is included</a>
+</div>
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0;border:1px solid #DCD6C6;border-radius:3px;overflow:hidden;background:#FFFFFF">
+<img src="assets/room-luxury.jpg" alt="Luxury Room" style="width:100%;height:100%;min-height:280px;object-fit:cover;display:block">
+<div style="padding:32px 30px 34px;min-width:0">
+<div style="display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between">
+<h2 style="font:600 30px/1.08 'Archivo',sans-serif;letter-spacing:-.025em">Luxury Room</h2>
+<div style="text-align:right"><div style="font:600 28px/1 'Archivo',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:#2E3A26">&#8358;53,750</div><div style="font:400 13px/1.3 'Archivo',sans-serif;color:#5C6152;margin-top:4px">a night, VAT in</div></div>
+</div>
+<p style="font:400 17px/1.6 'Newsreader',Georgia,serif;color:#3A4030;margin-top:14px;max-width:60ch">Seven hundred square feet, a king bed and the only separate living room suite in the house. Breakfast on the morning you arrive is included. Take it when you are staying a while, or when you need somewhere to sit a guest down.</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;font:500 13.5px/1 'Archivo',sans-serif">
+<span style="background:#EAE5D7;color:#3A4030;padding:12px 14px;border-radius:2px">Living room suite</span>
+<span style="background:#EAE5D7;color:#3A4030;padding:12px 14px;border-radius:2px">King bed</span>
+<span style="background:#EAE5D7;color:#3A4030;padding:12px 14px;border-radius:2px">Breakfast on arrival</span>
+<span style="background:#EAE5D7;color:#3A4030;padding:12px 14px;border-radius:2px">Fridge</span>
+<span style="background:#EAE5D7;color:#3A4030;padding:12px 14px;border-radius:2px">En-suite</span>
+<span style="background:#EAE5D7;color:#3A4030;padding:12px 14px;border-radius:2px">Study desk</span>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:24px">
+<a href="#" onClick="{{ goBook }}" style="background:#2E3A26;color:#F5F3EC;font:600 15px/1 'Archivo',sans-serif;padding:17px 24px;border-radius:2px;min-height:48px;display:flex;align-items:center">Book now</a>
+<a href="#" onClick="{{ goFaqs }}" style="border:1px solid #1A2016;color:#1A2016;font:600 15px/1 'Archivo',sans-serif;padding:16px 23px;border-radius:2px;min-height:48px;display:flex;align-items:center">What is included</a>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ atFacilities }}">
+<div>
+<div style="background:#EAE5D7;border-bottom:1px solid #DCD6C6;padding:44px 4vw 40px">
+<div style="max-width:1440px;margin:0 auto">
+<div style="font:500 12.5px/1 'Archivo',sans-serif;letter-spacing:.09em;color:#6B7C51;margin-bottom:12px">FACILITIES</div>
+<h1 style="font:600 clamp(32px,4.4vw,52px)/1.04 'Archivo',sans-serif;letter-spacing:-.025em;max-width:24ch">What the house gives you, room by room and floor by floor.</h1>
+<p style="font:400 18px/1.6 'Newsreader',Georgia,serif;color:#3A4030;max-width:66ch;margin-top:14px">Eighteen guests is small enough that nothing here is a queue. The kitchen, the laundry and the mini-mart are the three that decide a long stay.</p>
+</div>
+</div>
+
+<div style="max-width:1440px;margin:0 auto;padding:44px 4vw 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px">
+<div style="background:#FFFFFF;border:1px solid #DCD6C6;border-radius:3px;padding:26px 24px 28px;min-width:0">
+<h2 style="font:600 22px/1.15 'Archivo',sans-serif;letter-spacing:-.015em">In every room</h2>
+<div style="border-top:1px solid #DCD6C6;margin-top:14px;font:400 15.5px/1.45 'Archivo',sans-serif;color:#3A4030">
+<div style="padding:11px 0;border-bottom:1px solid #EFEBDE">En-suite bathroom</div>
+<div style="padding:11px 0;border-bottom:1px solid #EFEBDE">Air conditioning</div>
+<div style="padding:11px 0;border-bottom:1px solid #EFEBDE">WiFi, day and night</div>
+<div style="padding:11px 0;border-bottom:1px solid #EFEBDE">Study desk</div>
+<div style="padding:11px 0">Television</div>
+</div>
+</div>
+<div style="background:#FFFFFF;border:1px solid #DCD6C6;border-radius:3px;padding:26px 24px 28px;min-width:0">
+<h2 style="font:600 22px/1.15 'Archivo',sans-serif;letter-spacing:-.015em">Eating and cooking</h2>
+<div style="border-top:1px solid #DCD6C6;margin-top:14px;font:400 15.5px/1.45 'Archivo',sans-serif;color:#3A4030">
+<div style="padding:11px 0;border-bottom:1px solid #EFEBDE">Room service</div>
+<div style="padding:11px 0;border-bottom:1px solid #EFEBDE">Fully equipped kitchen, yours to use</div>
+<div style="padding:11px 0;border-bottom:1px solid #EFEBDE">Mini-mart on site</div>
+<div style="padding:11px 0;border-bottom:1px solid #EFEBDE">Fridge in the Executive and the Luxury</div>
+<div style="padding:11px 0">Breakfast on arrival with the Luxury</div>
+</div>
+</div>
+<div style="background:#FFFFFF;border:1px solid #DCD6C6;border-radius:3px;padding:26px 24px 28px;min-width:0">
+<h2 style="font:600 22px/1.15 'Archivo',sans-serif;letter-spacing:-.015em">Day to day</h2>
+<div style="border-top:1px solid #DCD6C6;margin-top:14px;font:400 15.5px/1.45 'Archivo',sans-serif;color:#3A4030">
+<div style="padding:11px 0;border-bottom:1px solid #EFEBDE">Daily housekeeping</div>
+<div style="padding:11px 0;border-bottom:1px solid #EFEBDE">Laundry service</div>
+<div style="padding:11px 0;border-bottom:1px solid #EFEBDE">Front desk staffed 24 hours</div>
+<div style="padding:11px 0;border-bottom:1px solid #EFEBDE">Family friendly</div>
+<div style="padding:11px 0">Non-smoking throughout</div>
+</div>
+</div>
+<div style="background:#FFFFFF;border:1px solid #DCD6C6;border-radius:3px;padding:26px 24px 28px;min-width:0">
+<h2 style="font:600 22px/1.15 'Archivo',sans-serif;letter-spacing:-.015em">Arriving and parking</h2>
+<div style="border-top:1px solid #DCD6C6;margin-top:14px;font:400 15.5px/1.45 'Archivo',sans-serif;color:#3A4030">
+<div style="padding:11px 0;border-bottom:1px solid #EFEBDE">Parking inside the gate</div>
+<div style="padding:11px 0;border-bottom:1px solid #EFEBDE">Security on site</div>
+<div style="padding:11px 0;border-bottom:1px solid #EFEBDE">Gate staffed through the night</div>
+<div style="padding:11px 0;border-bottom:1px solid #EFEBDE;color:#3D4A31;font-weight:600">Step-free access [CLIENT TO CONFIRM]</div>
+<div style="padding:11px 0;color:#3D4A31;font-weight:600">Light and water [CLIENT TO CONFIRM]</div>
+</div>
+</div>
+</div>
+
+<div style="max-width:1440px;margin:0 auto;padding:40px 4vw 0">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+<img src="assets/room-luxury.jpg" alt="Inside a room at RHF Guesthouse" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block;border-radius:3px">
+<div style="aspect-ratio:3/2;background:#EAE5D7;border:1px dashed #A8A292;border-radius:3px;display:flex;align-items:center;justify-content:center;padding:20px;text-align:center">
+<span style="font:500 12.5px/1.6 'Archivo',sans-serif;letter-spacing:.05em;color:#5C6152">PHOTOGRAPH NEEDED<sc-if value="{{ showPhotoBriefs }}" hint-placeholder-val="{{ true }}"><span style="display:block;font:400 15px/1.5 'Newsreader',Georgia,serif;letter-spacing:0;color:#3A4030;margin-top:10px">The kitchen in use. One of the two things that sell a three-week stay.</span></sc-if></span>
+</div>
+<div style="aspect-ratio:3/2;background:#EAE5D7;border:1px dashed #A8A292;border-radius:3px;display:flex;align-items:center;justify-content:center;padding:20px;text-align:center">
+<span style="font:500 12.5px/1.6 'Archivo',sans-serif;letter-spacing:.05em;color:#5C6152">PHOTOGRAPH NEEDED<sc-if value="{{ showPhotoBriefs }}" hint-placeholder-val="{{ true }}"><span style="display:block;font:400 15px/1.5 'Newsreader',Georgia,serif;letter-spacing:0;color:#3A4030;margin-top:10px">The mini-mart shelf, stocked. The other one.</span></sc-if></span>
+</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ atLocation }}">
+<div>
+<div style="background:#EAE5D7;border-bottom:1px solid #DCD6C6;padding:44px 4vw 40px">
+<div style="max-width:1440px;margin:0 auto">
+<div style="font:500 12.5px/1 'Archivo',sans-serif;letter-spacing:.09em;color:#6B7C51;margin-bottom:12px">LOCATION</div>
+<h1 style="font:600 clamp(32px,4.4vw,52px)/1.04 'Archivo',sans-serif;letter-spacing:-.025em;max-width:24ch">House 388, Apo Resettlement, Zone A, Apo, Abuja.</h1>
+<p style="font:400 18px/1.6 'Newsreader',Georgia,serif;color:#3A4030;max-width:66ch;margin-top:14px">Directly opposite Acropolis Park &amp; Event Centre. If you are here for an event across the road, you can walk to it.</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:22px">
+<a href="#" style="background:#2E3A26;color:#F5F3EC;font:600 15px/1 'Archivo',sans-serif;padding:17px 24px;border-radius:2px;min-height:48px;display:flex;align-items:center">Get directions</a>
+<a href="tel:+2348023804982" style="border:1px solid #1A2016;color:#1A2016;font:600 15px/1 'Archivo',sans-serif;padding:16px 23px;border-radius:2px;min-height:48px;display:flex;align-items:center">Call 0802 380 4982</a>
+</div>
+</div>
+</div>
+
+<div style="max-width:1440px;margin:0 auto;padding:44px 4vw 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:36px;align-items:start">
+<div style="min-width:0">
+<h2 style="font:600 28px/1.1 'Archivo',sans-serif;letter-spacing:-.02em">From the airport</h2>
+<p style="font:400 17px/1.6 'Newsreader',Georgia,serif;color:#3A4030;max-width:62ch;margin-top:12px">About forty minutes by road. Come out of Nnamdi Azikiwe onto Airport Road heading towards town, then turn off for Apo and ask for Apo Resettlement, Zone A. We are House 388, directly opposite Acropolis, and any driver who knows Acropolis knows our gate. If you end up going in circles, ring 0802 380 4982 and we will talk you in.</p>
+<p style="font:400 16px/1.6 'Archivo',sans-serif;color:#5C6152;max-width:62ch;margin-top:14px">We do not run an airport pickup service, so arrange your own car or taxi.</p>
+<h2 style="font:600 28px/1.1 'Archivo',sans-serif;letter-spacing:-.02em;margin-top:32px">Arriving late</h2>
+<p style="font:400 17px/1.6 'Newsreader',Georgia,serif;color:#3A4030;max-width:62ch;margin-top:12px">The gate and the front desk are staffed at every hour of the night, so three in the morning is not a problem. There is parking inside the gate and security on site.</p>
+</div>
+<div style="min-width:0;font:400 16px/1.45 'Archivo',sans-serif;border-top:1px solid #1A2016">
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:15px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">Acropolis Park &amp; Event Centre</span><span style="color:#3A4030">across the road</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:15px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">Nnamdi Azikiwe airport</span><span style="color:#3A4030">about 40 minutes</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:15px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">Central Business District</span><span style="color:#3D4A31;font-weight:600">[CLIENT TO CONFIRM]</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:15px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">Nearest hospital</span><span style="color:#3D4A31;font-weight:600">[CLIENT TO CONFIRM]</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:15px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">Parking</span><span style="color:#3A4030">inside the gate</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:15px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">Front desk</span><span style="color:#3A4030">staffed 24 hours</span></div>
+</div>
+</div>
+
+<div style="max-width:1440px;margin:0 auto;padding:36px 4vw 0">
+<div style="aspect-ratio:21/9;background:#EAE5D7;border:1px dashed #A8A292;border-radius:3px;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center">
+<span style="font:500 12.5px/1.6 'Archivo',sans-serif;letter-spacing:.05em;color:#5C6152">MAP<sc-if value="{{ showPhotoBriefs }}" hint-placeholder-val="{{ true }}"><span style="display:block;font:400 16px/1.5 'Newsreader',Georgia,serif;letter-spacing:0;color:#3A4030;margin-top:10px;max-width:44ch">Static tile with our gate marked and Acropolis labelled across the road, below the written directions rather than above them.</span></sc-if></span>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ atFaqs }}">
+<div>
+<div style="background:#EAE5D7;border-bottom:1px solid #DCD6C6;padding:44px 4vw 40px">
+<div style="max-width:1440px;margin:0 auto">
+<div style="font:500 12.5px/1 'Archivo',sans-serif;letter-spacing:.09em;color:#6B7C51;margin-bottom:12px">FAQS</div>
+<h1 style="font:600 clamp(32px,4.4vw,52px)/1.04 'Archivo',sans-serif;letter-spacing:-.025em;max-width:22ch">Frequently asked questions.</h1>
+<p style="font:400 18px/1.6 'Newsreader',Georgia,serif;color:#3A4030;max-width:66ch;margin-top:14px">What people ask us before they book, in the order they ask it.</p>
+</div>
+</div>
+
+<div style="max-width:1440px;margin:0 auto;padding:44px 4vw 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:44px;align-items:start">
+<div style="min-width:0;display:flex;flex-direction:column;gap:34px">
+
+<div>
+<h2 style="font:600 26px/1.15 'Archivo',sans-serif;letter-spacing:-.02em">Will there be light and water?</h2>
+<div style="height:1px;background:#1A2016;margin:12px 0 14px"></div>
+<div style="border:1px solid #6B7C51;background:#EAE5D7;border-radius:3px;padding:18px 20px">
+<div style="font:600 12.5px/1 'Archivo',sans-serif;letter-spacing:.05em;color:#3D4A31;margin-bottom:10px">[CLIENT TO CONFIRM]</div>
+<p style="font:400 16px/1.6 'Archivo',sans-serif;color:#3A4030;max-width:70ch">Generator hours, whether there is inverter backup, and whether water is borehole or tanker. This is the first thing an Abuja guest wants to know, so the question stays on the page with the hole in it until you give us the answer.</p>
+</div>
+</div>
+
+<div>
+<h2 style="font:600 26px/1.15 'Archivo',sans-serif;letter-spacing:-.02em">How do I pay?</h2>
+<div style="height:1px;background:#1A2016;margin:12px 0 14px"></div>
+<p style="font:400 17px/1.6 'Newsreader',Georgia,serif;color:#3A4030;max-width:70ch">Payment is by bank transfer. The account name is shown at the point of transfer. There is no card payment here. You pick your dates and a room, you get a reference, we show the account details, and you send the receipt to us on WhatsApp.</p>
+</div>
+
+<div>
+<h2 style="font:600 26px/1.15 'Archivo',sans-serif;letter-spacing:-.02em">What time can I check in and out?</h2>
+<div style="height:1px;background:#1A2016;margin:12px 0 14px"></div>
+<div style="border:1px solid #6B7C51;background:#EAE5D7;border-radius:3px;padding:18px 20px">
+<div style="font:600 12.5px/1 'Archivo',sans-serif;letter-spacing:.05em;color:#3D4A31;margin-bottom:10px">[CLIENT TO CONFIRM]</div>
+<p style="font:400 16px/1.6 'Archivo',sans-serif;color:#3A4030;max-width:70ch">Standard check-in and check-out times, and whether early arrival or late departure carries a charge. The desk is staffed around the clock either way, so a late arrival is never a problem.</p>
+</div>
+</div>
+
+<div>
+<h2 style="font:600 26px/1.15 'Archivo',sans-serif;letter-spacing:-.02em">Can I cancel?</h2>
+<div style="height:1px;background:#1A2016;margin:12px 0 14px"></div>
+<div style="border:1px solid #6B7C51;background:#EAE5D7;border-radius:3px;padding:18px 20px">
+<div style="font:600 12.5px/1 'Archivo',sans-serif;letter-spacing:.05em;color:#3D4A31;margin-bottom:10px">[CLIENT TO CONFIRM]</div>
+<p style="font:400 16px/1.6 'Archivo',sans-serif;color:#3A4030;max-width:70ch">The notice period and whether a transfer is refundable, moveable or held as credit. Guests will look for this before they transfer money, so it is worth writing plainly.</p>
+</div>
+</div>
+
+<div>
+<h2 style="font:600 26px/1.15 'Archivo',sans-serif;letter-spacing:-.02em">Is my car safe?</h2>
+<div style="height:1px;background:#1A2016;margin:12px 0 14px"></div>
+<p style="font:400 17px/1.6 'Newsreader',Georgia,serif;color:#3A4030;max-width:70ch">There is adequate parking inside the gate and security on site. The gate and the front desk are staffed at every hour of the night, so arriving at three in the morning is not a problem.</p>
+</div>
+
+<div>
+<h2 style="font:600 26px/1.15 'Archivo',sans-serif;letter-spacing:-.02em">How do I get here from the airport?</h2>
+<div style="height:1px;background:#1A2016;margin:12px 0 14px"></div>
+<p style="font:400 17px/1.6 'Newsreader',Georgia,serif;color:#3A4030;max-width:70ch">About forty minutes by road. Come out of Nnamdi Azikiwe onto Airport Road heading towards town, then turn off for Apo and ask for Apo Resettlement, Zone A. We are House 388, directly opposite Acropolis Park &amp; Event Centre, and any driver who knows Acropolis knows our gate. If you end up going in circles, ring 0802 380 4982 and we will talk you in. We do not run an airport pickup service.</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:16px">
+<a href="#" onClick="{{ goLocation }}" style="background:#2E3A26;color:#F5F3EC;font:600 15px/1 'Archivo',sans-serif;padding:17px 22px;border-radius:2px;min-height:48px;display:flex;align-items:center">Get directions</a>
+<a href="tel:+2348023804982" style="border:1px solid #1A2016;color:#1A2016;font:600 15px/1 'Archivo',sans-serif;padding:16px 21px;border-radius:2px;min-height:48px;display:flex;align-items:center">Call 0802 380 4982</a>
+</div>
+</div>
+
+<div>
+<h2 style="font:600 26px/1.15 'Archivo',sans-serif;letter-spacing:-.02em">Can I work here?</h2>
+<div style="height:1px;background:#1A2016;margin:12px 0 14px"></div>
+<p style="font:400 17px/1.6 'Newsreader',Georgia,serif;color:#3A4030;max-width:70ch">WiFi runs day and night, there is a study desk in every room, air conditioning throughout, and the street is quiet. The Executive and the Luxury also have a fridge.</p>
+</div>
+
+<div>
+<h2 style="font:600 26px/1.15 'Archivo',sans-serif;letter-spacing:-.02em">Will I be fed?</h2>
+<div style="height:1px;background:#1A2016;margin:12px 0 14px"></div>
+<p style="font:400 17px/1.6 'Newsreader',Georgia,serif;color:#3A4030;max-width:70ch">Room service, a fully equipped kitchen you are welcome to use, and a mini-mart on site. Breakfast on the morning you arrive is included if you book the Luxury Room.</p>
+</div>
+
+<div>
+<h2 style="font:600 26px/1.15 'Archivo',sans-serif;letter-spacing:-.02em">Is the house accessible?</h2>
+<div style="height:1px;background:#1A2016;margin:12px 0 14px"></div>
+<div style="border:1px solid #6B7C51;background:#EAE5D7;border-radius:3px;padding:18px 20px">
+<div style="font:600 12.5px/1 'Archivo',sans-serif;letter-spacing:.05em;color:#3D4A31;margin-bottom:10px">[CLIENT TO CONFIRM]</div>
+<p style="font:400 16px/1.6 'Archivo',sans-serif;color:#3A4030;max-width:70ch">Whether there is step-free access from the car park to reception, which rooms are on the ground floor, and whether any bathroom has a level-access shower.</p>
+</div>
+</div>
+
+<div>
+<h2 style="font:600 26px/1.15 'Archivo',sans-serif;letter-spacing:-.02em">Anything else about day to day?</h2>
+<div style="height:1px;background:#1A2016;margin:12px 0 14px"></div>
+<p style="font:400 17px/1.6 'Newsreader',Georgia,serif;color:#3A4030;max-width:70ch">Laundry service and housekeeping. Family friendly. Non-smoking throughout the house. Bookings start at one night and have no maximum.</p>
+</div>
+
+</div>
+
+<div style="min-width:0;position:sticky;top:84px;background:#2E3A26;color:#EFECE1;border-radius:3px;padding:24px 24px 26px">
+<div style="font:500 12px/1 'Archivo',sans-serif;letter-spacing:.07em;color:#B7C4A2;margin-bottom:14px">YOUR DATES</div>
+<h2 style="font:600 22px/1.2 'Archivo',sans-serif;letter-spacing:-.015em;color:#FFFFFF">Book now</h2>
+<div style="display:flex;flex-direction:column;gap:10px;margin-top:16px">
+<span style="display:block;background:#3A4633;border:1px solid #4A5540;border-radius:2px;color:#DDE1D2;font:400 16px/1.2 'Archivo',sans-serif;padding:15px 14px;min-height:48px">Arrive</span>
+<span style="display:block;background:#3A4633;border:1px solid #4A5540;border-radius:2px;color:#DDE1D2;font:400 16px/1.2 'Archivo',sans-serif;padding:15px 14px;min-height:48px">Depart</span>
+<span style="display:block;background:#3A4633;border:1px solid #4A5540;border-radius:2px;color:#FFFFFF;font:400 16px/1.2 'Archivo',sans-serif;padding:15px 14px;min-height:48px">2 guests</span>
+</div>
+<a href="#" onClick="{{ goBook }}" style="display:flex;align-items:center;justify-content:center;background:#F5F3EC;color:#1A2016;font:600 15px/1 'Archivo',sans-serif;padding:17px 20px;border-radius:2px;margin-top:14px;min-height:48px">Book now</a>
+<p style="font:400 13.5px/1.5 'Archivo',sans-serif;color:#C5CBB8;margin-top:12px">From &#8358;32,250 a night, VAT included. Payment is by bank transfer.</p>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ atContact }}">
+<div>
+<div style="background:#EAE5D7;border-bottom:1px solid #DCD6C6;padding:44px 4vw 40px">
+<div style="max-width:1440px;margin:0 auto">
+<div style="font:500 12.5px/1 'Archivo',sans-serif;letter-spacing:.09em;color:#6B7C51;margin-bottom:12px">CONTACT</div>
+<h1 style="font:600 clamp(32px,4.4vw,52px)/1.04 'Archivo',sans-serif;letter-spacing:-.025em;max-width:24ch">Two numbers, both answered by somebody who works here.</h1>
+<p style="font:400 18px/1.6 'Newsreader',Georgia,serif;color:#3A4030;max-width:66ch;margin-top:14px">Not a call centre. If it is about a booking already made, quote your reference and we will find it.</p>
+</div>
+</div>
+
+<div style="max-width:1440px;margin:0 auto;padding:44px 4vw 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:36px;align-items:start">
+<div style="min-width:0;font:400 16px/1.5 'Archivo',sans-serif;border-top:1px solid #1A2016">
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:16px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">Front desk</span><a href="tel:+2348023804982" style="color:#3D4A31;font-weight:600">0802 380 4982</a></div>
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:16px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">Second line</span><a href="tel:+2347013112962" style="color:#3D4A31;font-weight:600">0701 311 2962</a></div>
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:16px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">Email</span><a href="mailto:rhfguesthouseltd@gmail.com" style="color:#3D4A31;font-weight:600;word-break:break-word">rhfguesthouseltd@gmail.com</a></div>
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:16px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">Address</span><span style="color:#3A4030;text-align:right;max-width:34ch">House 388, Apo Resettlement, Zone A, Apo, Abuja, FCT</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;padding:16px 0;border-bottom:1px solid #DCD6C6"><span style="font-weight:600">Hours</span><span style="color:#3A4030">the desk is staffed 24 hours</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:20px">
+<a href="#" style="background:#2E3A26;color:#F5F3EC;font:600 15px/1 'Archivo',sans-serif;padding:17px 22px;border-radius:2px;min-height:48px;display:flex;align-items:center">Message us on WhatsApp</a>
+<a href="#" onClick="{{ goLocation }}" style="border:1px solid #1A2016;color:#1A2016;font:600 15px/1 'Archivo',sans-serif;padding:16px 21px;border-radius:2px;min-height:48px;display:flex;align-items:center">Get directions</a>
+</div>
+</div>
+
+<div style="min-width:0;background:#FFFFFF;border:1px solid #DCD6C6;border-radius:3px;padding:28px 26px 30px">
+<h2 style="font:600 24px/1.15 'Archivo',sans-serif;letter-spacing:-.015em">Send us an enquiry</h2>
+<p style="font:400 15px/1.5 'Archivo',sans-serif;color:#5C6152;margin-top:6px;margin-bottom:20px">For a long stay, a group, or a question the FAQs did not answer.</p>
+<div style="display:flex;flex-direction:column;gap:14px">
+<label style="display:block"><span style="display:block;font:500 12px/1 'Archivo',sans-serif;letter-spacing:.06em;color:#5C6152;margin-bottom:7px">YOUR NAME</span><span style="display:block;background:#F5F3EC;border:1px solid #C9C3B1;border-radius:2px;font:400 16px/1.2 'Archivo',sans-serif;color:#8A8F7E;padding:15px 14px;min-height:48px">Full name</span></label>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px">
+<label style="display:block;min-width:0"><span style="display:block;font:500 12px/1 'Archivo',sans-serif;letter-spacing:.06em;color:#5C6152;margin-bottom:7px">EMAIL</span><span style="display:block;background:#F5F3EC;border:1px solid #C9C3B1;border-radius:2px;font:400 16px/1.2 'Archivo',sans-serif;color:#8A8F7E;padding:15px 14px;min-height:48px">you@example.com</span></label>
+<label style="display:block;min-width:0"><span style="display:block;font:500 12px/1 'Archivo',sans-serif;letter-spacing:.06em;color:#5C6152;margin-bottom:7px">PHONE</span><span style="display:block;background:#F5F3EC;border:1px solid #C9C3B1;border-radius:2px;font:400 16px/1.2 'Archivo',sans-serif;color:#8A8F7E;padding:15px 14px;min-height:48px">0800 000 0000</span></label>
+</div>
+<label style="display:block"><span style="display:block;font:500 12px/1 'Archivo',sans-serif;letter-spacing:.06em;color:#5C6152;margin-bottom:7px">WHAT DO YOU NEED</span><span style="display:block;background:#F5F3EC;border:1px solid #C9C3B1;border-radius:2px;font:400 16px/1.5 'Archivo',sans-serif;color:#8A8F7E;padding:15px 14px;min-height:110px">Dates, room type, how long you are staying</span></label>
+</div>
+<a href="#" style="display:flex;align-items:center;justify-content:center;background:#2E3A26;color:#F5F3EC;font:600 16px/1 'Archivo',sans-serif;padding:18px 20px;border-radius:2px;margin-top:18px;min-height:52px">Send this to the front desk</a>
+<p style="font:400 13.5px/1.5 'Archivo',sans-serif;color:#5C6152;margin-top:12px">We reply from rhfguesthouseltd@gmail.com, usually the same day.</p>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ atBook }}">
+<div>
+<div style="background:#2E3A26;color:#EFECE1;padding:44px 4vw 40px">
+<div style="max-width:1440px;margin:0 auto">
+<div style="font:500 12.5px/1 'Archivo',sans-serif;letter-spacing:.09em;color:#B7C4A2;margin-bottom:12px">BOOK NOW, STEP 1 OF 3</div>
+<h1 style="font:600 clamp(32px,4.4vw,52px)/1.04 'Archivo',sans-serif;letter-spacing:-.025em;color:#FFFFFF;max-width:22ch">Pick your dates, then pick your room.</h1>
+<p style="font:300 18px/1.6 'Newsreader',Georgia,serif;color:#DDE1D2;max-width:64ch;margin-top:14px">Prices below already include VAT. Payment is by bank transfer. The account name is shown at the point of transfer.</p>
+</div>
+</div>
+
+<div style="max-width:1440px;margin:0 auto;padding:32px 4vw 0">
+<div style="background:#FFFFFF;border:1px solid #1A2016;border-radius:3px;padding:24px 24px 26px">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;align-items:end">
+<label style="display:block;min-width:0"><span style="display:block;font:500 12px/1 'Archivo',sans-serif;letter-spacing:.06em;color:#5C6152;margin-bottom:7px">ARRIVE</span><span style="display:block;background:#F5F3EC;border:1px solid #C9C3B1;border-radius:2px;font:400 16px/1.2 'Archivo',sans-serif;padding:15px 14px;min-height:48px">14 Oct 2026</span></label>
+<label style="display:block;min-width:0"><span style="display:block;font:500 12px/1 'Archivo',sans-serif;letter-spacing:.06em;color:#5C6152;margin-bottom:7px">DEPART</span><span style="display:block;background:#F5F3EC;border:1px solid #C9C3B1;border-radius:2px;font:400 16px/1.2 'Archivo',sans-serif;padding:15px 14px;min-height:48px">17 Oct 2026</span></label>
+<label style="display:block;min-width:0"><span style="display:block;font:500 12px/1 'Archivo',sans-serif;letter-spacing:.06em;color:#5C6152;margin-bottom:7px">GUESTS</span><span style="display:block;background:#F5F3EC;border:1px solid #C9C3B1;border-radius:2px;font:400 16px/1.2 'Archivo',sans-serif;padding:15px 14px;min-height:48px">2</span></label>
+<span style="display:flex;align-items:center;justify-content:center;background:#2E3A26;color:#F5F3EC;font:600 15px/1 'Archivo',sans-serif;padding:17px 20px;border-radius:2px;min-height:48px">Update prices</span>
+</div>
+<p style="font:400 14.5px/1.5 'Archivo',sans-serif;color:#5C6152;margin-top:14px">Three nights, two guests. All three rooms are available for these dates.</p>
+</div>
+</div>
+
+<div style="max-width:1440px;margin:0 auto;padding:24px 4vw 0;display:flex;flex-direction:column;gap:14px">
+
+<div style="background:#FFFFFF;border:1px solid #DCD6C6;border-radius:3px;padding:22px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;align-items:center">
+<div style="min-width:0">
+<h2 style="font:600 24px/1.1 'Archivo',sans-serif;letter-spacing:-.02em">Business Room</h2>
+<p style="font:400 15px/1.5 'Archivo',sans-serif;color:#5C6152;margin-top:6px">500 ft&#178;, 1 double, en-suite, desk, television, air conditioning</p>
+</div>
+<div style="min-width:0"><div style="font:600 26px/1 'Archivo',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.02em">&#8358;96,750</div><div style="font:400 14px/1.4 'Archivo',sans-serif;color:#5C6152;margin-top:5px">3 nights at &#8358;32,250, VAT included</div></div>
+<a href="#" style="background:#2E3A26;color:#F5F3EC;font:600 15px/1 'Archivo',sans-serif;padding:17px 22px;border-radius:2px;min-height:48px;display:flex;align-items:center;justify-content:center">Take this room</a>
+</div>
+
+<div style="background:#FFFFFF;border:1px solid #6B7C51;border-radius:3px;padding:22px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;align-items:center">
+<div style="min-width:0">
+<div style="font:600 12px/1 'Archivo',sans-serif;letter-spacing:.07em;color:#6B7C51;margin-bottom:8px">MOST BOOKED</div>
+<h2 style="font:600 24px/1.1 'Archivo',sans-serif;letter-spacing:-.02em">Executive Room</h2>
+<p style="font:400 15px/1.5 'Archivo',sans-serif;color:#5C6152;margin-top:6px">600 ft&#178;, 1 queen, en-suite, fridge, desk, television, air conditioning</p>
+</div>
+<div style="min-width:0"><div style="font:600 26px/1 'Archivo',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.02em">&#8358;129,000</div><div style="font:400 14px/1.4 'Archivo',sans-serif;color:#5C6152;margin-top:5px">3 nights at &#8358;43,000, VAT included</div></div>
+<a href="#" style="background:#2E3A26;color:#F5F3EC;font:600 15px/1 'Archivo',sans-serif;padding:17px 22px;border-radius:2px;min-height:48px;display:flex;align-items:center;justify-content:center">Take this room</a>
+</div>
+
+<div style="background:#FFFFFF;border:1px solid #DCD6C6;border-radius:3px;padding:22px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;align-items:center">
+<div style="min-width:0">
+<h2 style="font:600 24px/1.1 'Archivo',sans-serif;letter-spacing:-.02em">Luxury Room</h2>
+<p style="font:400 15px/1.5 'Archivo',sans-serif;color:#5C6152;margin-top:6px">700 ft&#178;, 1 king, living room suite, breakfast on arrival, fridge</p>
+</div>
+<div style="min-width:0"><div style="font:600 26px/1 'Archivo',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.02em">&#8358;161,250</div><div style="font:400 14px/1.4 'Archivo',sans-serif;color:#5C6152;margin-top:5px">3 nights at &#8358;53,750, VAT included</div></div>
+<a href="#" style="background:#2E3A26;color:#F5F3EC;font:600 15px/1 'Archivo',sans-serif;padding:17px 22px;border-radius:2px;min-height:48px;display:flex;align-items:center;justify-content:center">Take this room</a>
+</div>
+
+</div>
+
+<div style="max-width:1440px;margin:0 auto;padding:44px 4vw 0">
+<h2 style="font:600 clamp(26px,3vw,34px)/1.1 'Archivo',sans-serif;letter-spacing:-.025em">How the rest works</h2>
+<p style="font:400 17px/1.6 'Newsreader',Georgia,serif;color:#3A4030;max-width:64ch;margin-top:12px;margin-bottom:24px">Four steps, and you always know which one you are on.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px">
+<div style="background:#EAE5D7;border-radius:3px;padding:22px 22px 24px;min-width:0"><div style="font:600 13px/1 'Archivo',sans-serif;letter-spacing:.06em;color:#6B7C51;margin-bottom:12px">STEP 1</div><p style="font:400 16px/1.55 'Archivo',sans-serif;color:#3A4030">Pick your dates and a room. You see the total with VAT in it before anything else happens.</p></div>
+<div style="background:#EAE5D7;border-radius:3px;padding:22px 22px 24px;min-width:0"><div style="font:600 13px/1 'Archivo',sans-serif;letter-spacing:.06em;color:#6B7C51;margin-bottom:12px">STEP 2</div><p style="font:400 16px/1.55 'Archivo',sans-serif;color:#3A4030">Give us your name, email and phone number. You get a booking reference straight away.</p></div>
+<div style="background:#EAE5D7;border-radius:3px;padding:22px 22px 24px;min-width:0"><div style="font:600 13px/1 'Archivo',sans-serif;letter-spacing:.06em;color:#6B7C51;margin-bottom:12px">STEP 3</div><p style="font:400 16px/1.55 'Archivo',sans-serif;color:#3A4030">We show our account number and the account name. Transfer within four hours to hold the room.</p></div>
+<div style="background:#EAE5D7;border-radius:3px;padding:22px 22px 24px;min-width:0"><div style="font:600 13px/1 'Archivo',sans-serif;letter-spacing:.06em;color:#6B7C51;margin-bottom:12px">STEP 4</div><p style="font:400 16px/1.55 'Archivo',sans-serif;color:#3A4030">Send the receipt on WhatsApp. We email your confirmation once the transfer lands.</p></div>
+</div>
+<p style="font:400 15px/1.6 'Archivo',sans-serif;color:#5C6152;max-width:70ch;margin-top:20px">There is no card payment here. The cancellation terms are <strong style="color:#3D4A31">[CLIENT TO CONFIRM]</strong> and will be shown before you transfer.</p>
+</div>
+</div>
+</sc-if>
+
+<div style="max-width:1440px;margin:0 auto;padding:64px 4vw 72px">
+<div style="background:#EAE5D7;border:1px solid #DCD6C6;border-radius:3px;padding:40px 5% 44px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;align-items:center">
+<div style="min-width:0">
+<h2 style="font:600 clamp(26px,3vw,34px)/1.1 'Archivo',sans-serif;letter-spacing:-.025em;max-width:22ch">Ready when you are.</h2>
+<p style="font:400 17px/1.6 'Newsreader',Georgia,serif;color:#3A4030;max-width:52ch;margin-top:12px">From &#8358;32,250 a night with VAT already in it. One night minimum, no maximum, and the desk is staffed whatever time you land.</p>
+</div>
+<div style="min-width:0;display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-end">
+<a href="#" onClick="{{ goBook }}" style="background:#2E3A26;color:#F5F3EC;font:600 16px/1 'Archivo',sans-serif;padding:19px 26px;border-radius:2px;min-height:52px;display:flex;align-items:center">Book now</a>
+<a href="tel:+2348023804982" style="border:1px solid #1A2016;color:#1A2016;font:600 16px/1 'Archivo',sans-serif;padding:18px 25px;border-radius:2px;min-height:52px;display:flex;align-items:center">Call 0802 380 4982</a>
+</div>
+</div>
+</div>
+
+<div style="background:#2E3A26;color:#EFECE1;padding:52px 4vw 24px">
+<div style="max-width:1440px;margin:0 auto">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px;padding-bottom:36px">
+<div style="min-width:0">
+<img src="assets/rhf-logo-reversed.png" alt="RHF Guesthouse" style="width:170px;height:auto;display:block;margin-bottom:14px">
+<p style="font:400 15px/1.55 'Newsreader',Georgia,serif;color:#C5CBB8">A home away from home, on a quiet street in Apo.</p>
+</div>
+<div style="min-width:0;font:400 15px/2 'Archivo',sans-serif">
+<div style="font:600 13px/1.3 'Archivo',sans-serif;letter-spacing:.06em;color:#B7C4A2;margin-bottom:10px">YOUR STAY</div>
+<a href="#" onClick="{{ goRooms }}" style="display:block;color:#EFECE1">Rooms</a>
+<a href="#" onClick="{{ goFacilities }}" style="display:block;color:#EFECE1">Facilities</a>
+<a href="#" onClick="{{ goFaqs }}" style="display:block;color:#EFECE1">FAQs</a>
+<a href="#" onClick="{{ goBook }}" style="display:block;color:#EFECE1">Book now</a>
+</div>
+<div style="min-width:0;font:400 15px/2 'Archivo',sans-serif">
+<div style="font:600 13px/1.3 'Archivo',sans-serif;letter-spacing:.06em;color:#B7C4A2;margin-bottom:10px">THE GUESTHOUSE</div>
+<a href="#" onClick="{{ goLocation }}" style="display:block;color:#EFECE1">Location</a>
+<a href="#" onClick="{{ goHome }}" style="display:block;color:#EFECE1">Home</a>
+<a href="#" onClick="{{ goContact }}" style="display:block;color:#EFECE1">Contact</a>
+<a href="#" style="display:block;color:#C5CBB8;font-size:13.5px">Careers, we are hiring</a>
+</div>
+<div style="min-width:0;font:400 15px/1.8 'Archivo',sans-serif;color:#EFECE1">
+<div style="font:600 13px/1.3 'Archivo',sans-serif;letter-spacing:.06em;color:#B7C4A2;margin-bottom:10px">REACH US</div>
+House 388, Apo Resettlement, Zone A, Apo, Abuja, FCT<br>
+<a href="tel:+2348023804982" style="color:#EFECE1">0802 380 4982</a><br>
+<a href="tel:+2347013112962" style="color:#EFECE1">0701 311 2962</a><br>
+<a href="mailto:rhfguesthouseltd@gmail.com" style="color:#EFECE1;word-break:break-word">rhfguesthouseltd@gmail.com</a>
+<a href="#" style="display:inline-flex;align-items:center;background:#F5F3EC;color:#1A2016;font:600 14px/1 'Archivo',sans-serif;padding:13px 16px;border-radius:2px;margin-top:14px;min-height:44px">Message us on WhatsApp</a>
+</div>
+</div>
+<div style="border-top:1px solid #4A5540;padding-top:18px;display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;font:400 13.5px/1.7 'Archivo',sans-serif;color:#C5CBB8">
+<span style="max-width:62ch">Payment is by bank transfer. The account name is shown at the point of transfer. There is no card payment here.</span>
+<span style="display:flex;flex-wrap:wrap;gap:8px 18px"><a href="#" style="color:#C5CBB8">Terms</a><a href="#" style="color:#C5CBB8">Privacy</a><a href="#" style="color:#C5CBB8">Cancellation and refunds</a><span>&#169; 2026 RHF Guesthouse Ltd</span></span>
+</div>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;startPage&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Home&quot;,&quot;Rooms&quot;,&quot;Facilities&quot;,&quot;Location&quot;,&quot;FAQs&quot;,&quot;Contact&quot;,&quot;Book now&quot;],&quot;default&quot;:&quot;Home&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Page&quot;},&quot;showPhotoBriefs&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Handover&quot;},&quot;showLongStay&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Handover&quot;}}">
+class Component extends DCLogic {
+  state = { page: null, narrow: false, menuOpen: false };
+
+  componentDidMount() {
+    this.measure = () => {
+      const narrow = window.innerWidth < 900;
+      if (narrow !== this.state.narrow) this.setState({ narrow, menuOpen: false });
+    };
+    this.measure();
+    window.addEventListener('resize', this.measure);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.measure);
+  }
+
+  go(page) {
+    return (e) => {
+      if (e && e.preventDefault) e.preventDefault();
+      this.setState({ page, menuOpen: false });
+      if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+  }
+
+  setMenu(menuOpen) {
+    return (e) => {
+      if (e && e.preventDefault) e.preventDefault();
+      this.setState({ menuOpen });
+    };
+  }
+
+  renderVals() {
+    const page = this.state.page || this.props.startPage || 'Home';
+    return {
+      atHome: page === 'Home',
+      atRooms: page === 'Rooms',
+      atFacilities: page === 'Facilities',
+      atLocation: page === 'Location',
+      atFaqs: page === 'FAQs',
+      atContact: page === 'Contact',
+      atBook: page === 'Book now',
+      wideNav: !this.state.narrow,
+      narrowNav: this.state.narrow,
+      menuOpen: this.state.narrow && this.state.menuOpen,
+      openMenu: this.setMenu(true),
+      closeMenu: this.setMenu(false),
+      showPhotoBriefs: this.props.showPhotoBriefs ?? true,
+      showLongStay: this.props.showLongStay ?? true,
+      goHome: this.go('Home'),
+      goRooms: this.go('Rooms'),
+      goFacilities: this.go('Facilities'),
+      goLocation: this.go('Location'),
+      goFaqs: this.go('FAQs'),
+      goContact: this.go('Contact'),
+      goBook: this.go('Book now')
+    };
+  }
+}
+</script>
+</body>
+</html>
